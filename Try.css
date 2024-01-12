@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    width: 500px;
+    margin: auto;
+    padding: 8px 13px;
+    border: 1px solid #dddd;
+    margin-top: 10px;
+}
+h2{
+    text-align: center;
+}
+label{
+    display: flex;
+    margin-top: 5px;
+    font-weight: bold;
+}
+input{
+    width: 100%;
+    padding: 5px;
+}
+input[type="submit"]{
+    margin-top: 5px;
+    background-color: red;
+    border: none;
+    font-weight: 900;
+    color: #ffff;
+}
+input[type="submit"]:hover{
+    background-color: green;
+}
+p{
+    margin-top: 5px;
+}
