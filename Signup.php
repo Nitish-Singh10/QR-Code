@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     $Password = $_POST['Password'];
 
     if(!empty($Email) && !empty($Password) && !is_numeric($Email)){
-        $query = "INSERT INTO vender VALUES ('', '$Fname', '$Lname', '$Gender', '$Address', '$Phone', '$Email', '$Password', '')";
+        $query = "INSERT INTO admin VALUES ('', '$Fname', '$Lname', '$Gender', '$Address', '$Phone', '$Email', '$Password', '')";
         mysqli_query($mysqli,$query);
         echo "<script>alert('Successfully Register');</script>";
     }
