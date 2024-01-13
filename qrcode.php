@@ -25,7 +25,7 @@
     $pixel_Size = 10;
     $frame_Size = 10;
 
-    $query = "INSERT INTO Registration VALUES('','$Name','$Designation','$NOC','$Address','$Phone','$Email','$file')";
+    $query = "INSERT INTO registration VALUES('','$Name','$Designation','$NOC','$Address','$Phone','$Email','$file')";
     // mysqli_query($mysqli,$query);
     if($mysqli->query($query)==true)
     {
