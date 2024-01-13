@@ -48,7 +48,7 @@ if (isset($_SESSION['user_name'])) {
             // Handle default case or exit gracefully
             exit("Invalid session data");
     }
-    echo $query;
+    // echo $query;
 
     // Execute and display table rows
     if ($result = $mysqli->query($query)) {
