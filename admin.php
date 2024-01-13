@@ -40,7 +40,7 @@ session_start();
                   <?php
                     require_once('config.php');
                    
-                   $query="Select * from Registration";
+                   $query="Select * from registration";
                     
                     if($result = $mysqli->query($query)){
                         if($result->num_rows > 0){
