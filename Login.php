@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 header("location: ?err=wr");
             }
         } else {
-            echo "<script>alert('Wrong User Name');</script>";
+            header("location: ?err=user");
         }
 
         mysqli_stmt_close($stmt);
@@ -68,6 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
               </div>
               
               ';
+            }elseif($err == 'user'){
+                echo '      <div class="alert alert-danger" role="alert">
+                Wrong Email 
+              </div>
+              
+              ';
+
             }
         }
         ?>

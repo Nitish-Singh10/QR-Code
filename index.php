@@ -44,6 +44,12 @@
         <div class="col-md-3">
         </div>
         <div class="col-md-6">
+            <?php 
+            if(isset($_GET['by'])){
+                $by =$_GET['by'];
+            }
+            
+            ?>
         <form action="qrcode.php"  method="POST" role="form">
                 <label for="Fname">Name</label>
                 <input type="text" name="Name" placeholder="Your Name">
@@ -55,16 +61,18 @@
                 <input type="text" name="Address" placeholder="">
                 <label for="Lname">Phone</label>
                 <input type="text" name="Phone" placeholder="Surname">
+                <!-- <label for="Lname">by</label> -->
+                
+                <input hidden type="text" name="by" placeholder="Surname" value="<?php echo $by ?>">
                 <label for="Lname">Email</label>
+
                 <input type="text" name="Email" placeholder="Surname">
                 <button onclick="submit()">Submit</button>
                             
         </form>
         </div>
         <a href="Login.php">Admin Login</a>
-        <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>
