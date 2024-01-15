@@ -21,7 +21,7 @@ if (isset($_SESSION['user_name'])) {
               
     echo '</head>
           <body>';
-          include "./script.php";
+          //include "./script.php";
 
     echo '<h3>Welcome ' . $_SESSION['user_name'] . '</h3>
           <p><a href="Logout.php">Log Out</a></p>
@@ -30,7 +30,7 @@ if (isset($_SESSION['user_name'])) {
           <div class="col-md-8">
               <h1>QR Code List</h1><br><br>
               <div id="columnControls"></div>
-              <table id="data" class="table table-bordered table-hover">
+              <table  class="table table-bordered table-hover" id="data">
                   <thead>
                       <tr>
                           <th>Sr.No</th>
