@@ -25,7 +25,7 @@ if (isset($_SESSION['user_name'])) {
               <div class="col-md-2"></div>
               <div class="col-md-8">
                   <h1>QR Code List</h1><br><br>
-                  <table class="table table-bordered table-hover">
+                  <table id="data" class="table table-bordered table-hover">
                       <thead>
                           <tr>
                               <th>Sr.No</th>
