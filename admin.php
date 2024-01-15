@@ -15,8 +15,11 @@ if (isset($_SESSION['user_name'])) {
 
               
     echo      '</head>
-          <body>
-              <h3>Welcome ' . $_SESSION['user_name'] . '</h3>
+          <body>';
+          include "./script.php";
+
+
+          echo   '<h3>Welcome ' . $_SESSION['user_name'] . '</h3>
               <p><a href="Logout.php">Log Out</a></p>
 
               <div class="col-md-2"></div>
