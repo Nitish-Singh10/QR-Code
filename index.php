@@ -62,8 +62,13 @@
                 <label for="Lname">Phone</label>
                 <input type="text" name="Phone" placeholder="Surname">
                 <!-- <label for="Lname">by</label> -->
+                <?php
+                if(isset($by)){
+                   echo '<input hidden type="text" name="by" placeholder="Surname" value="<?php echo $by ?>">';
+
+                }
                 
-                <input hidden type="text" name="by" placeholder="Surname" value="<?php echo $by ?>">
+                ?>
                 <label for="Lname">Email</label>
 
                 <input type="text" name="Email" placeholder="Surname">
