@@ -51,7 +51,7 @@
             
             ?>
         <form action="qrcode.php"  method="POST" role="form">
-                <label for="Fname">Name</label>
+                <label for="Fname">Name 1</label>
                 <input type="text" name="Name" placeholder="Your Name">
                 <label for="Mname">Designation</label>
                 <input type="text" name="Designation"  placeholder="Designation">
