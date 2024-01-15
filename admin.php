@@ -81,23 +81,19 @@ if (isset($_SESSION['user_name'])) {
       </div>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
       <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
       <script>
           $(document).ready(function() {
               // Initialize DataTable
               var table = $("#data").DataTable({
-                  searching: true,
-                  paging: true,
-                  ordering: true,
+                  dom: "Bfrtip", // Controls position: B = Buttons, f = Filtering input, r = Processing display element, t = The table, i = Information summary
                   buttons: [
                       {
                           extend: "colvis",
                           postfixButtons: ["colvisRestore"],
                           collectionLayout: "fixed two-column"
                       }
-                  ],
-                  dom: "Bfrtip" // Controls position: B = Buttons, f = Filtering input, r = Processing display element, t = The table, i = Information summary
+                  ]
               });
 
               // Add the controls to the desired location
