@@ -10,8 +10,11 @@ if (isset($_SESSION['user_name'])) {
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-              <title>Admin Page</title>
-          </head>
+              <title>Admin Page</title>';
+              include "./script.php";
+
+              
+    echo      '</head>
           <body>
               <h3>Welcome ' . $_SESSION['user_name'] . '</h3>
               <p><a href="Logout.php">Log Out</a></p>
