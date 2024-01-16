@@ -66,7 +66,9 @@ try {
         Qrcode::png($pname, $file, $ecc, $pixel_Size, $frame_Size);
         header('location:index.php?msg=data added successfully');
     } else {
-        header('location:index.php?msg=data failed');
+        throw new Exception("Database Error: " . $mysqli->error);
+
+        // header('location:index.php?msg=data failed');
     }
 } catch (Exception $e) {
     header('location:index.php?msg=' . $e->getMessage());
