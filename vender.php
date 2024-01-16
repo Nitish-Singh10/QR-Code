@@ -2,6 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
+use Endroid\QrCode\QrCode;
 use Zxing\QrReader;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,8 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $tmpFilePath = $_FILES['image']['tmp_name'];
 
+        // Use the QR code library to generate a QR code
+        $qrCode = new QrCode();
+        $qrCode->setText(file_get_contents($tmpFilePath));
+
         // Create a QR code reader instance
-        $qrReader = new QrReader($tmpFilePath);
+        $qrReader = new QrReader($qrCode->writeString());
 
         try {
             // Decode the QR code
