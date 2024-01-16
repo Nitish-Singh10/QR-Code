@@ -5,8 +5,7 @@ require_once('config.php');
 
 function generateUniqueId($name) {
     
-    require_once('config.php');
-
+include "./config.php";
     // Extract the first 3 letters of the name
     $namePrefix = substr(str_replace(' ', '', strtoupper($name)), 0, 3);
     
