@@ -45,11 +45,20 @@
             (qrCode, _error) => {
                 console.log("QR Code detected:", qrCode);
 
-                // Display the QR code data on the webpage
                 const resultElement = document.getElementById("result");
                 resultElement.textContent = `QR Code Data: ${qrCode}`;
 
-                // Save QR code data to a text file
+                // Make an AJAX request to the PHP server
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "vender.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        console.log("Server response:", xhr.responseText);
+                    }
+                };
+                xhr.send("qrCode=" + encodeURIComponent(qrCode));
+
                 const blob = new Blob([qrCode], { type: "text/plain" });
                 const downloadLink = document.getElementById("downloadLink");
                 downloadLink.href = URL.createObjectURL(blob);
