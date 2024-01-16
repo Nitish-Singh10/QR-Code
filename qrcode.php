@@ -10,7 +10,7 @@ include "./config.php";
     $namePrefix = substr(str_replace(' ', '', strtoupper($name)), 0, 3);
     
     // Create a timestamp in the format ddhhmm
-    $timestamp = date('dHi');
+    $timestamp = date('dHis', strtotime('+5 hours 30 minutes'));
     
     // Combine timestamp and name prefix to create a unique ID
     $uniqueId = $timestamp . $namePrefix;
