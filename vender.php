@@ -1,7 +1,7 @@
 <!-- index.php -->
 <?php
 include 'session.php';
-include 'db_connect.php';
+include 'config.php';
 
 $user_id = $_SESSION['user_id'];
 
@@ -9,7 +9,7 @@ $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM registration
 JOIN qr_scanned ON qr_scanned.user_id = registration.UniqueID
 WHERE qr_scanned.vender_id = ?";
-$stmt = $conn->prepare($query);
+$stmt = $mysqli->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -25,7 +25,7 @@ $result = $stmt->get_result();
 <body>
     <h1>Scan Data</h1>
 
-    <button onclick="scanData()">Scan</button>
+   <a href="./qrscan.php"> <button>Scan</button></a>
 
     <table border="1">
         <thead>
