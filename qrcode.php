@@ -4,6 +4,7 @@ include('phpqrcode/qrlib.php');
 require_once('config.php');
 
 function generateUniqueId($length = 5) {
+    include "./config.php";
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $maxAttempts = 10; // Maximum attempts to generate a unique ID
 
