@@ -3,33 +3,29 @@
 include('phpqrcode/qrlib.php');
 require_once('config.php');
 
-function generateUniqueId($length = 5) {
-    include "./config.php";
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $maxAttempts = 10; // Maximum attempts to generate a unique ID
+function generateUniqueId($name) {
+    
+    require_once('config.php');
 
-    for ($attempt = 0; $attempt < $maxAttempts; $attempt++) {
-        $randomString = '';
+    // Extract the first 3 letters of the name
+    $namePrefix = substr(str_replace(' ', '', strtoupper($name)), 0, 3);
+    
+    // Create a timestamp in the format ddhhmm
+    $timestamp = date('dHi');
+    
+    // Combine timestamp and name prefix to create a unique ID
+    $uniqueId = $timestamp . $namePrefix;
 
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, strlen($characters) - 1)];
-        }
+    // Check if the generated ID already exists in the database
+    $queryCheck = "SELECT * FROM registration WHERE UniqueID = '$uniqueId'";
+    $resultCheck = $mysqli->query($queryCheck);
 
-        // Combine timestamp and random string to create a unique ID
-        $timestamp = time();
-        $uniqueId = $timestamp . $randomString;
-
-        // Check if the generated ID already exists in the database
-        $queryCheck = "SELECT * FROM registration WHERE UniqueID = '$uniqueId'";
-        $resultCheck = $mysqli->query($queryCheck);
-
-        if ($resultCheck->num_rows === 0) {
-            return $uniqueId; // Return the unique ID if it's not found in the database
-        }
+    if ($resultCheck->num_rows === 0) {
+        return $uniqueId; // Return the unique ID if it's not found in the database
+    } else {
+        // If the ID already exists, handle it as needed (throw an exception, etc.)
+        throw new Exception("Generated ID already exists in the database");
     }
-
-    // If maximum attempts reached, throw an error or handle it as needed
-    throw new Exception("Unable to generate a unique ID after $maxAttempts attempts");
 }
 
 // Getting Values from Form
@@ -42,7 +38,7 @@ $Email = $_POST['Email'];
 
 // Generate a unique ID using the function
 try {
-    $uniqueId = generateUniqueId();
+    $uniqueId = generateUniqueId($Name);
 
     // Check uniqueness of email and phone
     $queryCheck = "SELECT * FROM registration WHERE Email = '$Email' OR Phone = '$Phone' OR UniqueID = '$uniqueId'";
@@ -67,8 +63,6 @@ try {
         header('location:index.php?msg=data added successfully');
     } else {
         throw new Exception("Database Error: " . $mysqli->error);
-
-        // header('location:index.php?msg=data failed');
     }
 } catch (Exception $e) {
     header('location:index.php?msg=' . $e->getMessage());
