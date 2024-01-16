@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,20 +15,24 @@
             margin: 0;
             flex-direction: column;
         }
+
         #my-qr-reader {
             width: 80%;
             max-width: 300px;
         }
+
         #result {
             margin-top: 20px;
             font-size: 1.2rem;
         }
+
         #downloadLink {
             margin-top: 20px;
             display: none;
         }
     </style>
 </head>
+
 <body>
     <div id="my-qr-reader"></div>
     <div id="result"></div>
@@ -50,11 +55,18 @@
 
                 // Make an AJAX request to the PHP server
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "vender.php", true);
+                xhr.open("POST", "process_qr_code.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        console.log("Server response:", xhr.responseText);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            console.log("Server response:", xhr.responseText);
+
+                            // Redirect to another page
+                            window.location.href = "success_page.php";
+                        } else {
+                            console.error("Error processing QR code data");
+                        }
                     }
                 };
                 xhr.send("qrCode=" + encodeURIComponent(qrCode));
@@ -70,4 +82,5 @@
         );
     </script>
 </body>
+
 </html>
