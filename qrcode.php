@@ -61,7 +61,7 @@ try {
     $pixel_Size = 10;
     $frame_Size = 10;
 
-    $query = "INSERT INTO registration VALUES('', '$Name', '$Designation', '$NOC', '$Address', '$Phone', '$Email', '$file','$uniqueId')";
+    $query = "INSERT INTO registration VALUES('', '$Name', '$Designation', '$NOC', '$Address', '$Phone', '$Email', '$file','','','','$uniqueId')";
     if ($mysqli->query($query) === true) {
         Qrcode::png($pname, $file, $ecc, $pixel_Size, $frame_Size);
         header('location:index.php?msg=data added successfully');
