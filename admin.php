@@ -1,36 +1,26 @@
 <?php
-include("config.php");
+session_name("session1");
 session_start();
-
-if (isset($_SESSION['user_name'])) {
+error_reporting(0);
+include("database.php");
+$admin_name = $_SESSION['admin_name'];
+$admin_no = $_SESSION['admin_no'];
+if (isset($admin_name) == true) {
     echo '<!DOCTYPE html>
           <html lang="en">
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-              <!-- DataTables CSS -->
-              <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-
-              <!-- Select2 CSS -->
-              <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-              <title>Admin Page</title>';
-            //   include "./script.php";
+              <link rel="stylesheet" href="admin.css">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+              <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+              <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+              <title>Admin Page</title>
+          </head>';
               
-    echo '</head>
-          <body>';
-          //include "./script.php";
-
-    echo '<h3>Welcome ' . $_SESSION['user_name'] . '</h3>
-          <p><a href="Logout.php">Log Out</a></p>
-
-          <div class="col-md-2"></div>
-          <div class="col-md-8">
-              <h1>QR Code List</h1><br><br>
-              <div id="columnControls"></div>
-              <table  class="table table-bordered table-hover" id="data">
+    echo '<body>
+          <h3>Welcome ' . $admin_name . '</h3>
+              <table id="myTable" class="display">
                   <thead>
                       <tr>
                           <th>Sr.No</th>
@@ -45,65 +35,40 @@ if (isset($_SESSION['user_name'])) {
                       </tr>
                   </thead>
                   <tbody>';
-
-    switch ($_SESSION['type']) {
-        case 'admin':
-            $query = "SELECT * FROM registration";
-            break;
-        case 'registrationdesk':
-            $pcid = $_SESSION['no'];
-            $query = "SELECT * FROM registration WHERE pcid = $pcid";
-            break;
-        default:
-            exit("Invalid session data");
+    if($admin_no == 0){
+        $query = "SELECT * FROM visiter";
     }
-
-    if ($result = $mysqli->query($query)) {
+    else{
+        $query = "SELECT * FROM visiter WHERE admin = $admin_no";
+    }
+    if ($result = $conn->query($query)) {
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_object()) {
                 echo '<tr>
-                          <td>' . $row->Id . '</td>
+                          <td>' . $row->NO . '</td>
                           <td>' . $row->Name . '</td>
                           <td>' . $row->Designation . '</td>
                           <td>' . $row->NOC . '</td>
                           <td>' . $row->AOC . '</td>
                           <td>' . $row->Phone . '</td>
                           <td>' . $row->Email . '</td>
-                          <td><img src="' . $row->OR . '" width="50px" height="50px"></td>
-                          <td><a href="Try.php">Download QR</a></td>
+                          <td><img src="'. $row->QR . '" width="50px" height="50px"></td>
+                          <td><a href="Id.php?id='.$row->NO.'">Download QR</a></td>
                       </tr>';
             }
         }
     }
 
     echo '</tbody>
-          </table>
-      </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-      <script>
-          $(document).ready(function() {
-              // Initialize DataTable
-              var table = $("#data").DataTable({
-                  dom: "Bfrtip", // Controls position: B = Buttons, f = Filtering input, r = Processing display element, t = The table, i = Information summary
-                  buttons: [
-                      {
-                          extend: "colvis",
-                          postfixButtons: ["colvisRestore"],
-                          collectionLayout: "fixed two-column"
-                      }
-                  ]
-              });
-
-              // Add the controls to the desired location
-              table.buttons().container().appendTo($("#columnControls"));
-          });
-      </script>
+          </table>   
+          <script>let table = new DataTable("#myTable");</script> 
+          <p><a href="logout.php">Log Out</a></p>  
       </body>
       </html>';
+
+
+
 } else {
-    header("location: Login.php");
-    exit;
+    header('location:login.php');
 }
 ?>

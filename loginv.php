@@ -1,7 +1,7 @@
 <?php
-session_name("session1");
+session_name("session2");
 session_start();
-$_SESSION["name"] = "1";
+$_SESSION["name"] = "2";
 include("database.php");
 ?>
 <!DOCTYPE html>
@@ -103,10 +103,9 @@ include("database.php");
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <header>Login Admin</header>
+        <header>Login Vender</header>
         <form action="" method="post">
             <div class="field">
                 <div class="input-field">
@@ -133,16 +132,15 @@ if (isset($_POST['submit'])) {
     $Name = $_POST['name'];
     $Password = $_POST['password'];
     if (!empty($Name) && !empty($Password)) {
-        $que = "SELECT * FROM admin where Name='$Name' LIMIT 1";
+        $que = "SELECT * FROM vender where Name='$Name' LIMIT 1";
         $data = mysqli_query($conn, $que);
         if ($data && mysqli_num_rows($data) > 0) {
             $fetch = mysqli_fetch_assoc($data);
             if ($fetch["Password"] == $Password) {
-                $no = $fetch["admin"];
-                $qr = $fetch["QR"];
-                $_SESSION['admin_no'] = $no;
+                $no = $fetch["NO"];
+                $_SESSION['user_id'] = $no;
                 $_SESSION['admin_name'] = $Name;
-                header("location:admin.php");
+                header("location:vender.php");
             } else {
                 echo "<script>alert('Wrong User Name and Password');</script>";
             }
